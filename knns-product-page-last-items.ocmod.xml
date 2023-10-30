@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<id><![CDATA[[OCMOD] Product page "Last items"]]></id>
+	<name><![CDATA[[OCMOD] Product page "Last items"]]></name>
+	<code>knns-product-page-last-items</code>
+	<version>0.1.0</version>
+	<author><![CDATA[<font color="#7F458C"><b>kanenas.net (aka Nikolas Branis)</b></font> - nbran@kanenas.net]]></author>
+	<link>https://kanenas.net/</link>
+	<file path="catalog/language/english/product/product.php" error="log">
+		<operation error="skip">
+			<search><![CDATA[// Text]]></search>
+			<add position="after"><![CDATA[$_['text_last_items']          = 'Last items!';]]></add>
+		</operation>
+	</file>
+	<file path="catalog/language/greek/product/product.php" error="log">
+		<operation error="skip">
+			<search><![CDATA[// Text]]></search>
+			<add position="after"><![CDATA[$_['text_last_items']          = 'Τελευταία τεμάχια!';]]></add>
+		</operation>
+	</file>
+	<file path="catalog/controller/product/product.php" error="log">
+		<operation error="skip">
+			<search><![CDATA[$data['text_model'] = $this->language->get('text_model');]]></search>
+			<add position="after"><![CDATA[			$data['text_last_items'] = $this->language->get('text_last_items');]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[$data['model'] = $product_info['model'];]]></search>
+			<add position="after"><![CDATA[
+			$data['jan'] = $product_info['jan'];
+			]]></add>
+		</operation>
+	</file>
+	<file path="catalog/view/theme/*/template/product/product.tpl" error="log">
+		<operation error="skip">
+			<search><![CDATA[<?php if ($price) { ?>]]></search>
+			<add position="before"><![CDATA[
+          <div class="knns-jan">
+            <?php if ($jan) { ?>
+              <?php echo $text_last_items; ?>
+            <?php } ?>
+          </div>
+			]]></add>
+		</operation>
+	</file>
+</modification>
